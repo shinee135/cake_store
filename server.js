@@ -33,18 +33,13 @@ app.use(cors({
   credentials: true
 }));
 
-// var mysql = require('mysql');
-
-var con = mysql.createConnection({
-  host: "127.0.0.1",
-  user: "root",
-  password: "Tung135790?"
-});
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
+//Connect database
+try {
+  await db.sequelize.authenticate();
+  console.log('Connection database successfully.');
+} catch (error) {
+  console.error('Unable to connect to the database:', error);
+}
 
 // //Connect database
 // try {
