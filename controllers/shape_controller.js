@@ -2,7 +2,8 @@ import {
     createShapeService, 
     deleteShapeService, 
     getShapeByNameService, 
-    updateShapeService 
+    updateShapeService,
+    getShapeService
     } 
 from "../models/services/shape_service.js";
 import createError from "../ultis/createError.js"
