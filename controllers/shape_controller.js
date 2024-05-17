@@ -31,6 +31,19 @@ export const getShapeByName = async(req, res, next) =>{
         next(error)
     }
 }
+
+export const getShape = async(req, res, next) =>{
+    try {
+        const data = req.body;
+        const shape = await getShapeService();
+        if(shape instanceof Error) return next(shape);
+        res.status(200).send(shape);
+        console.log(error);
+    } catch (error) {
+        next(error)
+    }
+}
+
 export const updateShape = async(req, res, next) =>{
     try {
         const id = req.params.id;
