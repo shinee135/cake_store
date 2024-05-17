@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(cors({
-  origin: ['http://localhost:5000'],
+  origin: ['http://localhost:5000','https://cake-store-lvhd.onrender.com'],
   credentials: true
 }));
 
