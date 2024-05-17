@@ -47,6 +47,18 @@ export const getShapeByNameService = async(name_Shape)=>{
         return error;
     }
 }
+
+export const getShapeByNameService = async()=>{
+    try {
+        const Shape = await db.shape.findAll();
+        if(Shape.length == 0) return createError(400, 'Không có Shape!')
+        return Shape;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+
 export const updateShapeService = async(name,id)=>{
     try {
         const update_Shape = await db.shape.update({
