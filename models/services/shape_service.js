@@ -48,7 +48,7 @@ export const getShapeByNameService = async(name_Shape)=>{
     }
 }
 
-export const getShapeByNameService = async()=>{
+export const getShapeService = async()=>{
     try {
         const Shape = await db.shape.findAll();
         if(Shape.length == 0) return createError(400, 'Không có Shape!')
