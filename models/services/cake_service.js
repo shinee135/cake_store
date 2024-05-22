@@ -1,18 +1,16 @@
 import e from "express";
 import db from "../entities/index.js"
 import createError from "../../ultis/createError.js";
-import { Op } from "sequelize";
-export const createCakeService = async (name, layer, shape_id, size_id,color_id,flavor_id,filling_id,other_features,price,state_id,quantity) => {
+import { Op, col, where } from "sequelize";
+export const createCakeService = async (name, layer, shape_id, size_id, color_id, flavor_id, filling_id, other_features, price, quantity) => {
     try {
         // Kiểm tra xem bánh có tồn tại không
         const checkName = await db.cake.findOne({
-            where: {
-                name
-            }
+            where: { name }
         });
 
         if (checkName) {
-            throw createError(400, 'Bánh đã tồn tại!');
+            throw new Error('Bánh đã tồn tại!');
         }
 
         try {
@@ -27,13 +25,12 @@ export const createCakeService = async (name, layer, shape_id, size_id,color_id,
                 filling_id,
                 other_features,
                 price,
-                state_id,
                 quantity
-            },);
+            });
 
             return cake;
         } catch (error) {
-            // Nếu có lỗi
+            // Nếu có lỗi khi tạo bánh hoặc thêm các mối quan hệ
             throw error;
         }
     } catch (error) {
@@ -41,6 +38,7 @@ export const createCakeService = async (name, layer, shape_id, size_id,color_id,
         throw error;
     }
 };
+
 
 
 export const deleteCakeService = async(id)=>{
@@ -68,29 +66,29 @@ export const deleteCakeService = async(id)=>{
 export const getCakesAllService = async()=>{
     try {
         const cakes = await db.cake.findAll({
-            // include:[
-            //     {
-            //         model: db.shape
-            //     },
-            //     {
-            //         model: db.size
-            //     },
-            //     {
-            //         model: db.color
-            //     },
-            //     {
-            //         model: db.flavor
-            //     },
-            //     {
-            //         model: db.filling
-            //     },
-            //     {
-            //         model: db.status
-            //     },
-            //     {
-            //         model: db.image
-            //     }
-            // ],
+            include:[
+                {
+                    model: db.shape
+                },
+                {
+                    model: db.size
+                },
+                {
+                    model: db.color
+                },
+                {
+                    model: db.flavor
+                },
+                {
+                    model: db.filling
+                },
+                // {
+                //     model: db.status
+                // },
+                // {
+                //     model: db.image
+                // }
+            ],
         });
         if(cakes.length == 0) return createError(400, 'Không có Bệnh!')
         return cakes;
@@ -104,15 +102,29 @@ export const getCakesByIdService = async(id) =>{
     try {
         const cake = await db.cake.findOne({
             where : {id},
-            // include : [
-            //     {
-            //         model : db.,
-            //     },
-            // ]   
+            include : [
+                {
+                    model : db.shape,
+                },
+                {
+                    model : db.color,
+                },
+                {
+                    model : db.filling,
+                },
+                {
+                    model : db.flavor,
+                },
+                {
+                    model : db.size
+                },
+
+            ]   
         })
-        if(!cake) return createError(400, 'Không có sách!')
+        if(!cake) return createError(400, 'Không có Cake!')
         return cake;
     } catch (error) {
+        console.log(error)
         return error;
     }
 }   
@@ -122,46 +134,89 @@ export const getCakesByNameService = async (name_cake) => {
         const cakes = await db.cake.findOne({
             include: [
                 {
-                    model: db.status,
+                    model : db.shape,
                 },
                 {
-                    model: db.diet,
-                }
+                    model : db.color,
+                },
+                {
+                    model : db.filling,
+                },
+                {
+                    model : db.flavor,
+                },
+                {
+                    model : db.size
+                },
             ],
             where: name_cake ? { name: { [Op.like]: name_cake } } : {} // Chỉ áp dụng toán tử like khi name_cake tồn tại
         });
-        if (cakes.length === 0) return createError(400, 'Không có Bệnh!');
+        if (cakes.length === 0) return createError(400, 'Không có Bánh!');
         return cakes;
     } catch (error) {
         console.log(error);
         return error;
     }
 }
-export const getCakesByStatusService = async(name_status)=>{
+// export const getCakesByStatusService = async(name_status)=>{
+//     try {
+//         const cakes = await db.cake.findAll({
+//             include:[
+//                 {
+//                     model:db.status,
+//                     where :name_status
+//                 },
+//                 {
+//                     model:db.diet,
+//                 }
+//             ],
+
+//         });
+//         if(cakes.length == 0) return createError(400, 'Không có Bệnh!')
+//         return cakes;
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+export const getCakesByQueryService = async(filter) => {
+
     try {
-        const cakes = await db.cake.findAll({
-            include:[
+
+        const cakesByQuery = await db.cake.findAll({
+            include : [
                 {
-                    model:db.status,
-                    where :name_status
+                    model : db.color,
+                    where : color
                 },
                 {
-                    model:db.diet,
+                    model : db.filling,
+                    where : filling
+                },
+                {
+                    model : db.flavor,
+                    where : flavor
                 }
-            ],
-
-        });
-        if(cakes.length == 0) return createError(400, 'Không có Bệnh!')
-        return cakes;
+            ]
+        })
     } catch (error) {
-        console.log(error)
+        return error
     }
 }
-export const updateCakeService = async(name,info,id)=>{
+
+export const updateCakeService = async(name,id,layer,shape_id,size_id,color_id,flavor_id,filling_id,other_features,price,quantity)=>{
     try {
         const update_cake = await db.cake.update({
             name,
-            info
+            layer,
+            shape_id,
+            size_id,
+            color_id,
+            flavor_id,
+            filling_id,
+            other_features,
+            price,
+            quantity
         }, {
             where : {
                 id
@@ -174,6 +229,7 @@ export const updateCakeService = async(name,info,id)=>{
             update_cake
         }
     } catch (error) {
+        console.log(error)
         return error;   
     }
 }

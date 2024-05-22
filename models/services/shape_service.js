@@ -39,7 +39,7 @@ export const deleteShapeService = async(id)=>{
 
 export const getShapeByNameService = async(name_Shape)=>{
     try {
-        const Shape = await db.shape.findAll({where : {name : name_Shape}});
+        const Shape = await db.shape.findOne({where : {name : name_Shape}});
         if(Shape.length == 0) return createError(400, 'Không có Shape!')
         return Shape;
     } catch (error) {
@@ -47,6 +47,18 @@ export const getShapeByNameService = async(name_Shape)=>{
         return error;
     }
 }
+
+export const getShapeService = async()=>{
+    try {
+        const Shape = await db.shape.findAll();
+        if(Shape.length == 0) return createError(400, 'Không có Shape!')
+        return Shape;
+    } catch (error) {
+        console.log(error);
+        return error;
+    }
+}
+
 export const updateShapeService = async(name,id)=>{
     try {
         const update_Shape = await db.shape.update({

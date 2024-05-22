@@ -2,7 +2,8 @@ import {
     createShapeService, 
     deleteShapeService, 
     getShapeByNameService, 
-    updateShapeService 
+    updateShapeService,
+    getShapeService
     } 
 from "../models/services/shape_service.js";
 import createError from "../ultis/createError.js"
@@ -31,6 +32,20 @@ export const getShapeByName = async(req, res, next) =>{
         next(error)
     }
 }
+
+export const getShape = async(req, res, next) =>{
+    try {
+        const data = req.body;
+        const shape = await getShapeService();
+        if(shape instanceof Error) return next(shape);
+        res.status(200).send(shape);
+        console.log(error);
+    } catch (error) {
+        console.log(error)
+        next(error)
+    }
+}
+
 export const updateShape = async(req, res, next) =>{
     try {
         const id = req.params.id;

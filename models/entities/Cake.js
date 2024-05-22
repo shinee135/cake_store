@@ -12,30 +12,12 @@ const Cake = (sequelize) => sequelize.define('Cake',{
   layer: {
     type:Sequelize.INTEGER,
   },
-  shape_id: {
-    type:Sequelize.INTEGER,
-  }, 
-  size_id: {
-    type:Sequelize.INTEGER,
-  }, 
-  color_id: {
-    type:Sequelize.INTEGER,
-  }, 
-  flavor_id: {
-    type:Sequelize.INTEGER,
-  }, 
-  filling_id: {
-    type:Sequelize.INTEGER,
-  }, 
   other_features: {
     type: Sequelize.STRING,
   }, 
   price: {
     type: Sequelize.STRING,
   },   
-  state_id: {
-    type: Sequelize.INTEGER,
-  },
   quantity: {
     type: Sequelize.INTEGER
   },

@@ -44,31 +44,46 @@ db.size = Size(sequelize)
 db.status = Status(sequelize)
 db.image = Image(sequelize)
 
-db.cake.hasOne(db.color)
-db.color.belongsTo(db.cake,{
+/*__User__*/
+//RoleId
+db.role.hasMany(db.user)
+db.user.belongsTo(db.role)
+
+/* Cake */ 
+db.color.hasMany(db.cake,{
+  foreignKey: 'color_id',
+})
+db.cake.belongsTo(db.color,{
   foreignKey: 'color_id'}),
 
-db.cake.hasOne(db.filling)
-db.filling.belongsTo(db.cake,{
+db.filling.hasMany(db.cake,{
+  foreignKey :'filling_id',
+})
+db.cake.belongsTo(db.filling,{
   foreignKey: 'filling_id'})
 
-db.cake.hasOne(db.flavor)
-db.flavor.belongsTo(db.cake,{
+db.flavor.hasMany(db.cake,{
+  foreignKey: 'flavor_id'
+})
+db.cake.belongsTo(db.flavor,{
   foreignKey: 'flavor_id'})
 
-db.cake.hasOne(db.shape)
-db.shape.belongsTo(db.cake,{
+db.shape.hasMany(db.cake,{
+  foreignKey:'shape_id'
+})
+db.cake.belongsTo(db.shape,{
   foreignKey: 'shape_id'}),
   
-db.cake.hasOne(db.size)
-db.size.belongsTo(db.cake,{
+db.size.hasOne(db.cake,{
+  foreignKey :'size_id'
+})
+db.cake.belongsTo(db.size,{
   foreignKey: 'size_id'})
   
-db.cake.hasOne(db.status)
-db.status.belongsTo(db.cake,{
-  foreignKey: 'state_id'})
 
-db.cake.hasOne(db.image)
-db.image.belongsTo(db.cake,{
+db.image.hasOne(db.cake,{
+  foreignKey :'image_id'
+})
+db.cake.belongsTo(db.image,{
   foreignKey: 'image_id'})
 export default db;

@@ -6,7 +6,7 @@ import {
      updateCake,
      getCakesByName,
      getCakesAll,
-     getCakesByStatus,
+     // getCakesByStatus,
      getCakesById
 } 
 from '../controllers/cake_controller.js';
@@ -17,6 +17,6 @@ routerCake.delete('/delete/:id',deleteCake)
 routerCake.get('/get',getCakesAll)
 routerCake.get('/searchByName',getCakesByName)
 routerCake.put('/update/:id',updateCake)
-routerCake.get('/searchByStatus',getCakesByStatus)
+// routerCake.get('/searchByStatus',getCakesByStatus)
 routerCake.get('/searchById/:id',getCakesById)
 export default routerCake;
