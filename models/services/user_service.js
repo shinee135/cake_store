@@ -141,19 +141,13 @@ export const getUsersByQueryService = async(filter) => {
     }
 }
 
-export const updateUserService = async(name,id,layer,shape_id,size_id,color_id,flavor_id,filling_id,other_features,price,quantity)=>{
+export const updateUserService = async(name,id,phone,address,email)=>{
     try {
         const update_user = await db.user.update({
             name,
-            layer,
-            shape_id,
-            size_id,
-            color_id,
-            flavor_id,
-            filling_id,
-            other_features,
-            price,
-            quantity
+            phone,
+            email,
+            address
         }, {
             where : {
                 id
