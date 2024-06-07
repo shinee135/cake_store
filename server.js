@@ -14,6 +14,7 @@ import routerShape from "./routes/shape_routes.js";
 import routerSize from "./routes/size_routes.js";
 import routerStatus from "./routes/status_routes.js";
 import routerCake from "./routes/cake_routes.js";
+import routerUser from "./routes/user_routes.js";
 
 dotenv.config()
 // create express app
@@ -67,6 +68,7 @@ app.use('/api/shape',routerShape)
 app.use('/api/size', routerSize)
 app.use('/api/status',routerStatus)
 app.use('/api/cake',routerCake)
+app.use('/api/user',routerUser)
 
 // listen for requests
 app.listen(port, () => {
