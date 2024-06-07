@@ -45,9 +45,7 @@ db.status = Status(sequelize)
 db.image = Image(sequelize)
 
 /*__User__*/
-//RoleId
-db.role.hasMany(db.user)
-db.user.belongsTo(db.role)
+
 
 /* Cake */ 
 db.color.hasMany(db.cake,{
