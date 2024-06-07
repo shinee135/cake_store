@@ -144,16 +144,18 @@ export const getUsersByQueryService = async(filter) => {
 export const updateUserService = async(name,id,phone,address,email)=>{
     try {
         const update_user = await db.user.update({
-            name,
-            phone,
-            email,
-            address
+            name:name,
+            phone:phone,
+            
+            address:address,
+            email:email,
         }, {
             where : {
                 id
             }
         })
-        if(update_user[0] == 0) return createError(400, 'Chỉnh sửa không thành công!')
+        console.log(id)
+        if(!update_user || update_user[0] == 0) return createError(400, 'Chỉnh sửa không thành công!')
         return {
             status: true,
             message: 'Chỉnh sửa thành công !',
