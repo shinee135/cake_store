@@ -14,6 +14,8 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
         }
 
         try {
+            const result = await db.sequelize.transaction(async (t) => {
+
             // Tạo mới bánh
             const cake = await db.cake.create({
                 name,
@@ -37,6 +39,8 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
             }
 
             return cake;
+        });
+        return result;
         } catch (error) {
             // Nếu có lỗi khi tạo bánh hoặc thêm các mối quan hệ
             throw error;
