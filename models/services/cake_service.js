@@ -97,9 +97,9 @@ export const getCakesAllService = async()=>{
                 // {
                 //     model: db.status
                 // },
-                // {
-                //     model: db.image
-                // }
+                {
+                     model: db.image
+                }
             ],
         });
         if(cakes.length == 0) return createError(400, 'Không có Bệnh!')
