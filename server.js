@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import mysql from "mysql";
 import dotenv from 'dotenv';
 import cors from 'cors';
+import multer from "multer";
+
 
 import routerAuth from "./routes/auth_routes.js";
 import routerRole from "./routes/role_routes.js";
@@ -20,7 +22,6 @@ dotenv.config()
 // create express app
 const app = express();
 
-const multer = require('multer');
 
 // Setup server port
 const port = process.env.PORT || 5000;
