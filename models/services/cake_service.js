@@ -13,8 +13,7 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
             throw new Error('Bánh đã tồn tại!');
         }
 
-        try {
-            const result = await db.sequelize.transaction(async (t) => {
+        try {           
 
             // Tạo mới bánh
             const cake = await db.cake.create({
@@ -34,13 +33,11 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
             if (imagePath) {
                 await db.image.create({
                     cake_id: cake.id,
-                    image_url: imagePath // Đường dẫn tới ảnh
+                    name: imagePath // Đường dẫn tới ảnh
                 }, { transaction: t });
             }
 
             return cake;
-        });
-        return result;
         } catch (error) {
             // Nếu có lỗi khi tạo bánh hoặc thêm các mối quan hệ
             throw error;
