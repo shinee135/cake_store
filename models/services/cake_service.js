@@ -27,7 +27,7 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
                 other_features,
                 price,
                 quantity
-            },{ transaction: t });
+            });
 
             // Thêm ảnh vào bảng image với khóa ngoại là id của bánh
             if (imagePath) {
