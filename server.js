@@ -20,6 +20,8 @@ dotenv.config()
 // create express app
 const app = express();
 
+const multer = require('multer');
+
 // Setup server port
 const port = process.env.PORT || 5000;
 
