@@ -2,7 +2,7 @@ import e from "express";
 import db from "../entities/index.js"
 import createError from "../../ultis/createError.js";
 import { Op, col, where } from "sequelize";
-export const createCakeService = async (name, layer, shape_id, size_id, color_id, flavor_id, filling_id, other_features, price, quantity) => {
+export const createCakeService = async (name, layer, shape_id, size_id, color_id, flavor_id, filling_id, other_features, price, quantity,imagePath) => {
     try {
         // Kiểm tra xem bánh có tồn tại không
         const checkName = await db.cake.findOne({
@@ -26,7 +26,15 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
                 other_features,
                 price,
                 quantity
-            });
+            },{ transaction: t });
+
+            // Thêm ảnh vào bảng image với khóa ngoại là id của bánh
+            if (imagePath) {
+                await db.image.create({
+                    cake_id: cake.id,
+                    image_url: imagePath // Đường dẫn tới ảnh
+                }, { transaction: t });
+            }
 
             return cake;
         } catch (error) {

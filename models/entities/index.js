@@ -77,11 +77,11 @@ db.size.hasOne(db.cake,{
 })
 db.cake.belongsTo(db.size,{
   foreignKey: 'size_id'})
-  
 
-db.image.hasOne(db.cake,{
-  foreignKey :'image_id'
+
+db.image.belongsTo(db.cake,{
+  foreignKey :'cake_id'
 })
-db.cake.belongsTo(db.image,{
-  foreignKey: 'image_id'})
+db.cake.hasOne(db.image,{
+  foreignKey: 'cake_id'})
 export default db;

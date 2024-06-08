@@ -23,6 +23,18 @@ const app = express();
 // Setup server port
 const port = process.env.PORT || 5000;
 
+// Set up multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, 'uploads/'); // Specify the directory to save the uploaded files
+  },
+  filename: (req, file, cb) => {
+      cb(null, Date.now() + path.extname(file.originalname)); // Rename the file with a timestamp
+  }
+});
+
+const upload = multer({ storage: storage });
+
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
 
