@@ -57,11 +57,11 @@ export const deleteCakeService = async(id)=>{
         const delete_cake = await db.cake.destroy({
             where : {id}
         })
-        const deleted_status = await db.cake_status.destroy({
-            where: {
-                id: cakeId
-            }
-        });
+        // const deleted_status = await db.cake_status.destroy({
+        //     where: {
+        //         id: cakeId
+        //     }
+        // });
         
         if(delete_cake == 0) return createError(400, 'Xoá Bệnh không thành công!');
         if(deleted_status == 0) return createError(400, 'Xoá trạng thái không thành công!');
