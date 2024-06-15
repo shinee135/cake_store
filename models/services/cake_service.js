@@ -33,7 +33,7 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
             if (imagePath) {
                 await db.image.create({
                     cake_id: cake.id,
-                    name: imagePath // Đường dẫn tới ảnh
+                    image_url: imagePath // Đường dẫn tới ảnh
                 }, { transaction: t });
             }
 
