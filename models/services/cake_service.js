@@ -64,7 +64,7 @@ export const deleteCakeService = async(id)=>{
         // });
         
         if(delete_cake == 0) return createError(400, 'Xoá Bệnh không thành công!');
-        if(deleted_status == 0) return createError(400, 'Xoá trạng thái không thành công!');
+       
         return {
             message: 'Xoá thành công!'
         };
