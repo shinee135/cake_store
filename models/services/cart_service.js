@@ -79,6 +79,26 @@ export const getCartsByIdService = async(id) =>{
             include : [
                 {
                     model : db.cake,
+                    include : [
+                               {
+                                    model: db.shape
+                                },
+                                {
+                                    model: db.size
+                                },
+                                {
+                                    model: db.color
+                                },
+                                {
+                                    model: db.flavor
+                                },
+                                {
+                                    model: db.filling
+                                },
+                                {
+                                     model: db.image
+                                }
+                            ]
                 },
                 {
                     model : db.user,
@@ -100,6 +120,26 @@ export const getCartsByUserService = async(user_id) =>{
             include : [
                 {
                     model : db.cake,
+                    include : [
+                               {
+                                    model: db.shape
+                                },
+                                {
+                                    model: db.size
+                                },
+                                {
+                                    model: db.color
+                                },
+                                {
+                                    model: db.flavor
+                                },
+                                {
+                                    model: db.filling
+                                },
+                                {
+                                     model: db.image
+                                }
+                            ]
                 },
                 {
                     model : db.user,
