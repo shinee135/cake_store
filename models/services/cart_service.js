@@ -38,7 +38,27 @@ export const getCartAllService = async()=>{
         const Cart = await db.cart.findAll({
             include:[
                 {
-                    model: db.cake
+                    model: db.cake,
+                    include : [
+                               {
+                                    model: db.shape
+                                },
+                                {
+                                    model: db.size
+                                },
+                                {
+                                    model: db.color
+                                },
+                                {
+                                    model: db.flavor
+                                },
+                                {
+                                    model: db.filling
+                                },
+                                {
+                                     model: db.image
+                                }
+                            ]
                 },
                 {
                     model:db.user
