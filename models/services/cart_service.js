@@ -116,7 +116,9 @@ export const getCartsByIdService = async(id) =>{
 export const getCartsByUserService = async(user_id) =>{
     try {
         const cart = await db.cart.findOne({
-            where : {user_id},
+            where : {
+                user_id : user_id
+            },
             include : [
                 {
                     model : db.cake,
