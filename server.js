@@ -4,6 +4,7 @@ import bodyParser from "body-parser";
 import mysql from "mysql";
 import dotenv from 'dotenv';
 import cors from 'cors';
+import multer from "multer";
 
 import routerAuth from "./routes/auth_routes.js";
 import routerRole from "./routes/role_routes.js";
@@ -15,6 +16,8 @@ import routerSize from "./routes/size_routes.js";
 import routerStatus from "./routes/status_routes.js";
 import routerCake from "./routes/cake_routes.js";
 import routerUser from "./routes/user_routes.js";
+import routerCart from "./routes/cart_routes.js";
+import routerOder from "./routes/oder_routes.js";
 
 dotenv.config()
 // create express app
@@ -81,6 +84,10 @@ app.use('/api/size', routerSize)
 app.use('/api/status',routerStatus)
 app.use('/api/cake',routerCake)
 app.use('/api/user',routerUser)
+app.use('/api/cart',routerCart)
+app.use('/aoi/oder',routerOder)
+
+
 
 // listen for requests
 app.listen(port, () => {
