@@ -126,6 +126,9 @@ export const getCakesByIdService = async(id) =>{
                 {
                     model : db.size
                 },
+                {
+                     model: db.image
+                }
 
             ]   
         })
