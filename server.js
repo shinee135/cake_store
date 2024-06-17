@@ -87,7 +87,7 @@ app.use('/api/status',routerStatus)
 app.use('/api/cake',routerCake)
 app.use('/api/user',routerUser)
 app.use('/api/cart',routerCart)
-app.use('/aoi/oder',routerOder)
+app.use('/api/oder',routerOder)
 
 
 
