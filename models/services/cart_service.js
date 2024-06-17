@@ -72,6 +72,27 @@ export const getCartsByIdService = async(id) =>{
         return error;
     }
 } 
+
+export const getCartsByUserService = async(user_id) =>{
+    try {
+        const cart = await db.cart.findOne({
+            where : {user_id},
+            include : [
+                {
+                    model : db.cake,
+                },
+                {
+                    model : db.user,
+                }
+            ]   
+        })
+        if(!cart) return createError(400, 'Không có Cart!')
+        return cart;
+    } catch (error) {
+        console.log(error)
+        return error;
+    }
+} 
 export const updateCartService = async(id,cake_id)=>{
     try {
         const update_Cart = await db.cart.update({

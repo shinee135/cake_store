@@ -3,8 +3,9 @@ import {
     createCartService,
     getCartAllService,
     getCartsByIdService,
+    getCartsByUserService,
     deleteCartService,
-    updateCartService
+    updateCartService,
 } 
 from "../models/services/cart_service.js";
 
@@ -44,6 +45,16 @@ export const getCartsById  = async(req, res, next) =>{
         const cart = await getCartsByIdService(req.params.id)
         if(cart instanceof Error) return next(cart)
         return res.status(200).send(cart);
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getCartsByUser  = async(req, res, next) =>{
+    try {
+        const cake = await getCartsByUserService(req.params.id)
+        if(cake instanceof Error) return next(cake)
+        return res.status(200).send(cake);
     } catch (error) {
         next(error)
     }
