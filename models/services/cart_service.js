@@ -4,7 +4,6 @@ import createError from "../../ultis/createError.js";
 import { Op } from "sequelize";
 export const createCartService = async(cake_id,user_id) =>{
     try {
-        if(checkName) return createError(400, 'Cart đã tồn tại!')
         const Cart = await db.cart.create({
             user_id,
             cake_id
