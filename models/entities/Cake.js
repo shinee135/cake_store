@@ -21,9 +21,6 @@ const Cake = (sequelize) => sequelize.define('Cake',{
   quantity: {
     type: Sequelize.INTEGER
   },
-  image_id:{
-    type: Sequelize.STRING
-  },
   createdAt: {
     type: DataTypes.DATE, 
       allowNull: false

@@ -19,7 +19,7 @@ export const createCake = async(req, res, next) =>{
 
         const imagePath = req.file ? req.file.path : null;
 
-        const cake = await createCakeService(data.name, data.layer,data.shape_id, data.size_id, data.color_id,data.flavor_id,data.filling_id,data.other_features,data.price,data.quantity,imagePath);
+        const cake = await createCakeService(data.name, data.layer,data.shape_id, data.size_id, data.color_id,data.flavor_id,data.filling_id,data.other_features,data.price,data.quantity,data.imagePath);
 
         if(cake instanceof Error) return next(cake)
         if (cake.length === 0) {

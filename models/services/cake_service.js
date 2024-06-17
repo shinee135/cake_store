@@ -12,9 +12,8 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
         if (checkName) {
             throw new Error('Bánh đã tồn tại!');
         }
+        try {           
 
-        try {
-            const result = await db.sequelize.transaction(async (t) => {
             // Tạo mới bánh
             const cake = await db.cake.create({
                 name,
@@ -27,20 +26,17 @@ export const createCakeService = async (name, layer, shape_id, size_id, color_id
                 other_features,
                 price,
                 quantity
-            },{ transaction: t });
+            });
 
             // Thêm ảnh vào bảng image với khóa ngoại là id của bánh
             if (imagePath) {
                 await db.image.create({
                     cake_id: cake.id,
                     image_url: imagePath // Đường dẫn tới ảnh
-                }, { transaction: t });
-            }
-        
+                });
+            }    
 
             return cake;
-        });
-        return result;
         } catch (error) {
             // Nếu có lỗi khi tạo bánh hoặc thêm các mối quan hệ
             throw error;
@@ -60,14 +56,14 @@ export const deleteCakeService = async(id)=>{
         const delete_cake = await db.cake.destroy({
             where : {id}
         })
-        const deleted_status = await db.cake_status.destroy({
-            where: {
-                id: cakeId
-            }
-        });
+        // const deleted_status = await db.cake_status.destroy({
+        //     where: {
+        //         id: cakeId
+        //     }
+        // });
         
         if(delete_cake == 0) return createError(400, 'Xoá Bệnh không thành công!');
-        if(deleted_status == 0) return createError(400, 'Xoá trạng thái không thành công!');
+       
         return {
             message: 'Xoá thành công!'
         };
@@ -97,9 +93,9 @@ export const getCakesAllService = async()=>{
                 // {
                 //     model: db.status
                 // },
-                // {
-                //     model: db.image
-                // }
+                {
+                     model: db.image
+                }
             ],
         });
         if(cakes.length == 0) return createError(400, 'Không có Bệnh!')
