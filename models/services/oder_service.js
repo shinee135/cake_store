@@ -4,7 +4,6 @@ import createError from "../../ultis/createError.js";
 import { Op } from "sequelize";
 export const createOderService = async(price,isPaid,cake_id,user_id,address) =>{
     try {
-        if(checkName) return createError(400, 'Oder đã tồn tại!')
         const Oder = await db.oder.create({
             price,
             isPaid,

@@ -15,7 +15,7 @@ export const createCart = async(req, res, next) =>{
         
         // if(req.idRole !== 2) return next(createError(400, 'Bạn không có quyền này!'));
         const data = req.body;
-        const cart = await createCartService(data.cart_id,data.user_id);
+        const cart = await createCartService(data.cake_id,data.user_id,data.quantity);
 
         if(cart instanceof Error) return next(cart)
         if (cart.length === 0) {

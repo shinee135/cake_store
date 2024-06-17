@@ -2,12 +2,12 @@ import e from "express";
 import db from "../entities/index.js"
 import createError from "../../ultis/createError.js";
 import { Op } from "sequelize";
-export const createCartService = async(cake_id,user_id) =>{
+export const createCartService = async(cake_id,user_id,quantity) =>{
     try {
-        if(checkName) return createError(400, 'Cart đã tồn tại!')
         const Cart = await db.cart.create({
             user_id,
-            cake_id
+            cake_id,
+            quantity
         })
         if(!Cart) return createError(400, 'Thêm Cart không thành công!')
         return Cart;

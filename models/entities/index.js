@@ -11,6 +11,7 @@ import Size from "./Size.js";
 import Status from "./Status.js";
 import Image from "./Image.js";
 import Oder from "./Oder.js";
+import Cart from "./Cart.js";
 
 
 const sequelize = new Sequelize(
@@ -45,6 +46,7 @@ db.size = Size(sequelize)
 db.status = Status(sequelize)
 db.image = Image(sequelize)
 db.oder = Oder(sequelize)
+db.cart = Cart(sequelize)
 
 /*__User__*/
 
@@ -89,27 +91,31 @@ db.cake.hasOne(db.image,{
 
 /*__Cart__*/
 
-db.cake.belongsToMany(db.user,
-  {
-    through: "Cart",
-  }
-)
-db.user.belongsToMany(db.cake,
-  {
-    through: "Cart",
-  }
-)
+db.user.hasMany(db.cart,{
+  foreignKey: 'user_id'
+})
+db.cart.belongsTo(db.user, {
+  foreignKey: 'user_id'
+})
+db.cart.belongsTo(db.cake,{
+  foreignKey: 'cake_id'
+})
+db.cake.hasMany(db.cart, {
+  foreignKey:'cake_id'
+})
 
 /*__Oder__*/
 
-db.cake.belongsToMany(db.user,
-  {
-    through: "Oder",
-  }
-)
-db.user.belongsToMany(db.cake,
-  {
-    through: "Oder",
-  }
-)
+db.user.hasMany(db.oder,{
+  foreignKey: 'user_id'
+})
+db.oder.belongsTo(db.user, {
+  foreignKey: 'user_id'
+})
+db.oder.belongsTo(db.cake,{
+  foreignKey: 'cake_id'
+})
+db.cake.hasMany(db.oder, {
+  foreignKey:'cake_id'
+})
 export default db;
