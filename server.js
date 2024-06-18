@@ -111,7 +111,7 @@ app.use(bodyParser.json());
  * Real	POST	https://openapi.zalopay.vn/v2/create
  * description: tạo đơn hàng, thanh toán
  */
-app.post('/payment', async (req, res) => {
+app.post('/api/payment', async (req, res) => {
   const embed_data = {
     //sau khi hoàn tất thanh toán sẽ đi vào link này (thường là link web thanh toán thành công của mình)
     redirecturl: 'https://phongthuytaman.com',
@@ -129,7 +129,7 @@ app.post('/payment', async (req, res) => {
     embed_data: JSON.stringify(embed_data),
     amount: reb.body.amount,
     //khi thanh toán xong, zalopay server sẽ POST đến url này để thông báo cho server của mình
-    callback_url: 'https://cake-store-lvhd.onrender.com/callback',
+    callback_url: 'https://cake-store-lvhd.onrender.com/api/callback',
     description: `Lazada - Payment for the order #${transID}`,
     bank_code: '',
   };
@@ -165,7 +165,7 @@ app.post('/payment', async (req, res) => {
  * description: callback để Zalopay Server call đến khi thanh toán thành công.
  * Khi và chỉ khi ZaloPay đã thu tiền khách hàng thành công thì mới gọi API này để thông báo kết quả.
  */
-app.post('/callback', (req, res) => {
+app.post('/api/callback', (req, res) => {
   let result = {};
   console.log(req.body);
   try {
@@ -214,7 +214,7 @@ app.post('/callback', (req, res) => {
  * nên Merchant cần hiện thực việc chủ động gọi API truy vấn trạng thái đơn hàng.
  */
 
-app.post('/check-status-order', async (req, res) => {
+app.post('/api/check-status-order', async (req, res) => {
   const { app_trans_id } = req.body;
 
   let postData = {
