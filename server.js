@@ -127,7 +127,7 @@ app.post('/api/payment', async (req, res) => {
     app_time: Date.now(), // miliseconds
     item: JSON.stringify(items),
     embed_data: JSON.stringify(embed_data),
-    amount: reb.body.amount,
+    amount: req.body.amount,
     //khi thanh toán xong, zalopay server sẽ POST đến url này để thông báo cho server của mình
     callback_url: 'https://cake-store-lvhd.onrender.com/api/callback',
     description: `Lazada - Payment for the order #${transID}`,
