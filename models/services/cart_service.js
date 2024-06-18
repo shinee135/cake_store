@@ -38,7 +38,27 @@ export const getCartAllService = async()=>{
         const Cart = await db.cart.findAll({
             include:[
                 {
-                    model: db.cake
+                    model: db.cake,
+                    include : [
+                               {
+                                    model: db.shape
+                                },
+                                {
+                                    model: db.size
+                                },
+                                {
+                                    model: db.color
+                                },
+                                {
+                                    model: db.flavor
+                                },
+                                {
+                                    model: db.filling
+                                },
+                                {
+                                     model: db.image
+                                }
+                            ]
                 },
                 {
                     model:db.user
@@ -59,6 +79,26 @@ export const getCartsByIdService = async(id) =>{
             include : [
                 {
                     model : db.cake,
+                    include : [
+                               {
+                                    model: db.shape
+                                },
+                                {
+                                    model: db.size
+                                },
+                                {
+                                    model: db.color
+                                },
+                                {
+                                    model: db.flavor
+                                },
+                                {
+                                    model: db.filling
+                                },
+                                {
+                                     model: db.image
+                                }
+                            ]
                 },
                 {
                     model : db.user,
@@ -75,11 +115,33 @@ export const getCartsByIdService = async(id) =>{
 
 export const getCartsByUserService = async(user_id) =>{
     try {
-        const cart = await db.cart.findOne({
-            where : {user_id},
+        const cart = await db.cart.findAll({
+            where : {
+                user_id : user_id
+            },
             include : [
                 {
                     model : db.cake,
+                    include : [
+                               {
+                                    model: db.shape
+                                },
+                                {
+                                    model: db.size
+                                },
+                                {
+                                    model: db.color
+                                },
+                                {
+                                    model: db.flavor
+                                },
+                                {
+                                    model: db.filling
+                                },
+                                {
+                                     model: db.image
+                                }
+                            ]
                 },
                 {
                     model : db.user,
