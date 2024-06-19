@@ -45,6 +45,9 @@ export const getOderAllService = async()=>{
                     include :[
                         {
                             model : db.cart
+                        },
+                        {
+                            model : db.image
                         }
                     ]
                 },
@@ -71,6 +74,9 @@ export const getOderByIdService = async(id) =>{
                     include :[
                         {
                             model : db.cart
+                        },
+                        {
+                            model : db.image
                         }
                     ]
                 },
@@ -99,6 +105,9 @@ export const getOdersByUserService = async(user_id) =>{
                     include :[
                         {
                             model : db.cart
+                        },
+                        {
+                            model : db.image
                         }
                     ]
                 },
