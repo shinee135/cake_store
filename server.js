@@ -121,6 +121,7 @@ app.post('/api/payment', async (req, res) => {
   const transID = Math.floor(Math.random() * 1000000);
 
   console.log(req.body)
+  console.log(moment().format('YYMMDD')_transID)
 
   const order = {
     app_id: config.app_id,
