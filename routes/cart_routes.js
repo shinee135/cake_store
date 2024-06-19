@@ -6,7 +6,8 @@ import {
     updateCart,
     getCartAll,
     getCartsById,
-    getCartsByUser
+    getCartsByUser,
+    getCartByArrId
 }
 from '../controllers/cart_controller.js'
 
@@ -16,6 +17,7 @@ routerCart.delete('/delete/:id',deleteCart)
 routerCart.get('/get',getCartAll)
 routerCart.get('/searchById/:id',getCartsById)
 routerCart.get('/searchByUser/:id',getCartsByUser)
+routerCart.get('/searchByArrId/:id',getCartByArrId)
 routerCart.put('/update/:id',updateCart)
 
 export default routerCart
