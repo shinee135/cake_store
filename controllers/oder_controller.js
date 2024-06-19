@@ -80,7 +80,7 @@ export const updateOder = async(req, res, next) =>{
         // if(req.idRole !== 2) return next(createError(400, 'Bạn không có quyền này!'));
         if(!id) return next(createError(400, 'Không tìm thấy'))
         const data = req.body;
-        const update_oder = await updateOderService(id,data.cart_id,data.isPaid)
+        const update_oder = await updateOderService(id,data.price,data.isPaid,data.address)
         if(update_oder instanceof Error) return next(update_oder);
         res.status(200).send(update_oder);
     } catch (error) {
