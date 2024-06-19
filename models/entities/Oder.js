@@ -15,6 +15,9 @@ const Oder = (sequelize) => sequelize.define('Oder',{
   address:{
     type:Sequelize.STRING,
   },
+  quantity:{
+    type: Sequelize.INTEGER,
+  },
   createdAt: {
     type: DataTypes.DATE, 
       allowNull: false

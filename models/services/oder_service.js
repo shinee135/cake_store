@@ -2,14 +2,15 @@ import e from "express";
 import db from "../entities/index.js"
 import createError from "../../ultis/createError.js";
 import { Op } from "sequelize";
-export const createOderService = async(price,isPaid,cart_id,user_id,address) =>{
+export const createOderService = async(price,isPaid,cart_id,user_id,address,quantity) =>{
     try {
         const Oder = await db.oder.create({
             price,
             isPaid,
             user_id,
             cart_id,
-            address
+            address,
+            quantity
         })
         if(!Oder) return createError(400, 'Thêm Oder không thành công!')
         return Oder;
@@ -40,10 +41,10 @@ export const getOderAllService = async()=>{
         const Oder = await db.oder.findAll({
             include:[
                 {
-                    model: db.cart,
+                    model: db.cake,
                     include :[
                         {
-                            model : db.cake
+                            model : db.cart
                         }
                     ]
                 },
@@ -66,10 +67,10 @@ export const getOderByIdService = async(id) =>{
             where : {id},
             include : [
                 {
-                    model: db.cart,
+                    model: db.cake,
                     include :[
                         {
-                            model : db.cake
+                            model : db.cart
                         }
                     ]
                 },
@@ -94,10 +95,10 @@ export const getOdersByUserService = async(user_id) =>{
             },
             include : [
                 {
-                    model: db.cart,
+                    model: db.cake,
                     include :[
                         {
-                            model : db.cake
+                            model : db.cart
                         }
                     ]
                 },
@@ -114,12 +115,13 @@ export const getOdersByUserService = async(user_id) =>{
     }
 } 
 
-export const updateOderService = async(id,isPaid,address,price)=>{
+export const updateOderService = async(id,isPaid,address,price,quantity)=>{
     try {
         const update_Oder = await db.oder.update({
             isPaid,
             address,
-            price
+            price,
+            quantity
         }, {
             where : {
                 id

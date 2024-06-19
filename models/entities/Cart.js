@@ -6,9 +6,6 @@ const Cart = (sequelize) => sequelize.define('Cart',{
       primaryKey: true, 
       autoIncrement: true,
   }, 
-  quantity:{
-    type: Sequelize.INTEGER,
-  },
   createdAt: {
     type: DataTypes.DATE, 
       allowNull: false

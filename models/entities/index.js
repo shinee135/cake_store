@@ -112,10 +112,10 @@ db.user.hasMany(db.oder,{
 db.oder.belongsTo(db.user, {
   foreignKey: 'user_id'
 })
-db.oder.belongsTo(db.cart,{
-  foreignKey: 'cart_id'
+db.oder.belongsTo(db.cake,{
+  foreignKey: 'cake_id'
 })
-db.cart.hasMany(db.oder, {
-  foreignKey:'cart_id'
+db.cake.hasMany(db.oder, {
+  foreignKey:'cake_id'
 })
 export default db;

@@ -17,7 +17,7 @@ export const createOder = async(req, res, next) =>{
         // if(req.idRole !== 2) return next(createError(400, 'Bạn không có quyền này!'));
         const data = req.body;
 
-        const oder = await createOderService(data.price,data.isPaid,data.cart_id,data.user_id,data.address);
+        const oder = await createOderService(data.price,data.isPaid,data.cake_id,data.user_id,data.address,data.quantity);
 
         if(oder instanceof Error) return next(oder)
         if (oder.length === 0) {
