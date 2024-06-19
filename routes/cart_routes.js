@@ -17,7 +17,7 @@ routerCart.delete('/delete/:id',deleteCart)
 routerCart.get('/get',getCartAll)
 routerCart.get('/searchById/:id',getCartsById)
 routerCart.get('/searchByUser/:id',getCartsByUser)
-routerCart.get('/searchByArrId',getCartByArrId)
+routerCart.post('/searchByArrId',getCartByArrId)
 routerCart.put('/update/:id',updateCart)
 
 export default routerCart
