@@ -114,10 +114,10 @@ export const getOdersByUserService = async(user_id) =>{
     }
 } 
 
-export const updateOderService = async(id,cart_id,address,price)=>{
+export const updateOderService = async(id,isPaid,address,price)=>{
     try {
         const update_Oder = await db.oder.update({
-            cart_id,
+            isPaid,
             address,
             price
         }, {
