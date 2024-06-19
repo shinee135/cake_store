@@ -174,3 +174,46 @@ export const updateCartService = async(id,cake_id)=>{
         return error;   
     }
 }
+
+export const getCartByArrIdService = async(user_id, id) =>{
+    try {
+        console.log(id)
+        const carts = await db.cart.findAll({
+            where:{
+                [Op.and] : [
+                    {user_id : user_id_id},
+                    {id : id}
+                ]
+            },
+            include : [
+                {
+                    model : db.cake,
+                    include : [
+                               {
+                                    model: db.shape
+                                },
+                                {
+                                    model: db.size
+                                },
+                                {
+                                    model: db.color
+                                },
+                                {
+                                    model: db.flavor
+                                },
+                                {
+                                    model: db.filling
+                                },
+                                {
+                                     model: db.image
+                                }
+                            ]
+                }
+            ]
+        })
+        if(carts.length == 0) return createError(400, 'Không có sản phẩm !')
+        return carts;
+    } catch (error) {
+        return error;   
+    }
+}
