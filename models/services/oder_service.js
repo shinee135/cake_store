@@ -137,3 +137,22 @@ export const updateOderService = async(id,isPaid,address,price,quantity)=>{
         return error;   
     }
 }
+export const updateOderPaymentService = async(id,isPaid)=>{
+    try {
+        const update_Oder = await db.oder.update({
+            isPaid,
+        }, {
+            where : {
+                id
+            }
+        })
+        if(update_Oder[0] == 0) return createError(400, 'Chỉnh sửa không thành công!')
+        return {
+            Oder: true,
+            message: 'Chỉnh sửa thành công !',
+            update_Oder
+        }
+    } catch (error) {
+        return error;   
+    }
+}
