@@ -114,7 +114,7 @@ app.use(bodyParser.json());
 app.post('/api/payment', async (req, res) => {
   const embed_data = {
     //sau khi hoàn tất thanh toán sẽ đi vào link này (thường là link web thanh toán thành công của mình)
-    redirecturl: 'http://localhost:3000/orderCart',
+    redirecturl: 'http://localhost:3000/thankOrder',
   };
 
   const items = [];
