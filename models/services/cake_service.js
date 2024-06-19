@@ -215,7 +215,7 @@ export const getCakesByQueryService = async(filter) => {
     }
 }
 
-export const updateCakeService = async(name,id,layer,shape_id,size_id,color_id,flavor_id,filling_id,other_features,price,quantity)=>{
+export const updateCakeService = async(name,layer,shape_id,size_id,color_id,flavor_id,filling_id,other_features,price,quantity,id)=>{
     try {
         const update_cake = await db.cake.update({
             name,
