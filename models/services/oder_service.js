@@ -2,13 +2,13 @@ import e from "express";
 import db from "../entities/index.js"
 import createError from "../../ultis/createError.js";
 import { Op } from "sequelize";
-export const createOderService = async(price,isPaid,cart_id,user_id,address,quantity) =>{
+export const createOderService = async(price,isPaid,cake_id,user_id,address,quantity) =>{
     try {
         const Oder = await db.oder.create({
             price,
             isPaid,
             user_id,
-            cart_id,
+            cake_id,
             address,
             quantity
         })
@@ -45,6 +45,9 @@ export const getOderAllService = async()=>{
                     include :[
                         {
                             model : db.cart
+                        },
+                        {
+                            model : db.image
                         }
                     ]
                 },
@@ -71,6 +74,9 @@ export const getOderByIdService = async(id) =>{
                     include :[
                         {
                             model : db.cart
+                        },
+                        {
+                            model : db.image
                         }
                     ]
                 },
@@ -99,6 +105,9 @@ export const getOdersByUserService = async(user_id) =>{
                     include :[
                         {
                             model : db.cart
+                        },
+                        {
+                            model : db.image
                         }
                     ]
                 },
