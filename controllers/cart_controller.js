@@ -52,9 +52,9 @@ export const getCartsById  = async(req, res, next) =>{
 
 export const getCartsByUser  = async(req, res, next) =>{
     try {
-        const cake = await getCartsByUserService(req.params.id)
-        if(cake instanceof Error) return next(cake)
-        return res.status(200).send(cake);
+        const cart = await getCartsByUserService(req.params.id)
+        if(cart instanceof Error) return next(cart)
+        return res.status(200).send(cart);
     } catch (error) {
         next(error)
     }

@@ -76,6 +76,49 @@ export const getOderByIdService = async(id) =>{
     }
 } 
 
+export const getOdersByUserService = async(user_id) =>{
+    try {
+        const oder = await db.oder.findAll({
+            where : {
+                user_id : user_id
+            },
+            include : [
+                {
+                    model : db.cake,
+                    include : [
+                               {
+                                    model: db.shape
+                                },
+                                {
+                                    model: db.size
+                                },
+                                {
+                                    model: db.color
+                                },
+                                {
+                                    model: db.flavor
+                                },
+                                {
+                                    model: db.filling
+                                },
+                                {
+                                     model: db.image
+                                }
+                            ]
+                },
+                {
+                    model : db.user,
+                }
+            ]   
+        })
+        if(!oder) return createError(400, 'Không có Oder!')
+        return oder;
+    } catch (error) {
+        console.log(error)
+        return error;
+    }
+} 
+
 export const updateOderService = async(id,cake_id,address,price)=>{
     try {
         const update_Oder = await db.oder.update({

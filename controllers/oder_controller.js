@@ -4,6 +4,7 @@ import {
     deleteOderService,
     getOderAllService,
     getOderByIdService,
+    getOdersByUserService,
     updateOderService
 } 
 from "../models/services/oder_service.js";
@@ -43,6 +44,16 @@ export const getOderAll = async(req, res, next) =>{
 export const getOderById  = async(req, res, next) =>{
     try {
         const oder = await getOderByIdService(req.params.id)
+        if(oder instanceof Error) return next(oder)
+        return res.status(200).send(oder);
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const getOdersByUser  = async(req, res, next) =>{
+    try {
+        const oder = await getOdersByUserService(req.params.id)
         if(oder instanceof Error) return next(oder)
         return res.status(200).send(oder);
     } catch (error) {
