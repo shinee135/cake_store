@@ -114,7 +114,7 @@ app.use(bodyParser.json());
 app.post('/api/payment', async (req, res) => {
   const embed_data = {
     //sau khi hoàn tất thanh toán sẽ đi vào link này (thường là link web thanh toán thành công của mình)
-    redirecturl: 'https://phongthuytaman.com',
+    redirecturl: 'http://localhost:3000/cart',
   };
 
   const items = [];
@@ -132,8 +132,9 @@ app.post('/api/payment', async (req, res) => {
     amount: req.body.amount,
     //khi thanh toán xong, zalopay server sẽ POST đến url này để thông báo cho server của mình
     callback_url: 'https://cake-store-lvhd.onrender.com/api/callback',
+
     description: `Payment for the order #${transID}`,
-    bank_code: "zalopayapp",
+    bank_code: '',
   };
 
   // appid|app_trans_id|appuser|amount|apptime|embeddata|item
