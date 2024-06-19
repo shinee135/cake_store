@@ -90,10 +90,9 @@ export const updateCart = async(req, res, next) =>{
 
 export const getCartByArrId = async(req, res, next) =>{
     try {
-        const user_id = req.id;
-         console.log(customer_id)
         const id = req.body.id
-        if(!user_id) return next(createError(400, 'Bạn cần phải đăng nhập!'))
+        const user_id = req.body.user_id
+        // if(!user_id) return next(createError(400, 'Bạn cần phải đăng nhập!'))
         const carts = await getCartByArrIdService(user_id, id);
         if(carts instanceof Error) return next(carts);
         res.status(200).send(carts);

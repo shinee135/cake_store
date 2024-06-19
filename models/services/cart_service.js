@@ -181,7 +181,7 @@ export const getCartByArrIdService = async(user_id, id) =>{
         const carts = await db.cart.findAll({
             where:{
                 [Op.and] : [
-                    {user_id : user_id_id},
+                    {user_id : user_id},
                     {id : id}
                 ]
             },
