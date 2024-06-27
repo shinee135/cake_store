@@ -102,3 +102,17 @@ export const updateOderPayment = async(req, res, next) =>{
         next(error)   
     }
 }
+
+export const updateOderDelivery = async(req, res, next) =>{
+    try {
+        const id = req.params.id;
+        // if(req.idRole !== 2) return next(createError(400, 'Bạn không có quyền này!'));
+        if(!id) return next(createError(400, 'Không tìm thấy'))
+        const data = req.body;
+        const update_oder = await updateOderPaymentService(id,2)
+        if(update_oder instanceof Error) return next(update_oder);
+        res.status(200).send(update_oder);
+    } catch (error) {
+        next(error)   
+    }
+}
