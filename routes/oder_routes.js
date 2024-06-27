@@ -7,7 +7,8 @@ import {
     getOderAll,
     getOdersByUser,
     getOderById,
-    updateOderPayment
+    updateOderPayment,
+    updateOderDelivery
 }
 from '../controllers/oder_controller.js'
 
@@ -19,5 +20,6 @@ routerOder.get('/searchById/:id',getOderById)
 routerOder.get('/searchByUser/:id',getOdersByUser)
 routerOder.put('/update/:id',updateOder)
 routerOder.put('/updatePayment/:id',updateOderPayment)
+routerOder.put('/updateDelivery/:id',updateOderDelivery)
 
 export default routerOder;
